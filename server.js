@@ -6,6 +6,23 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(express.static('public'));
+
+
+//from chatgpt on 2/10/2025 so that can see what's stored in SQLite d/b on render server.
+// Debug route: show all data in your table
+app.get("/show-data", (req, res) => {
+  db.all("SELECT * FROM person", [], (err, rows) => {
+    if (err) {
+      console.error("DB error:", err.message);
+      res.status(500).send("Database error");
+      return;
+    }
+    res.json(rows); // Send back all rows as JSON
+  });
+});
+
+
+
 // This is called when the app is first started
 app.get('/', function(request, response) {
 console.log("In app.get (/)");
