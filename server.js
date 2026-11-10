@@ -44,18 +44,18 @@ app.post("/putData", function (request, response) {
 console.log("In app.post (/putData)");
 // build up insert statement. For example:
 // insert into person(first_name, surname) values ('Joe', 'Bloggs')
-let insStr = "insert into person(name, day, month, year) values (";
-insStr = insStr + "\'"+request.body.fname+"\', ";
-insStr = insStr + "\'"+request.body.sname+"\') ";
-insStr = insStr + "\'"+request.body.sname+"\') ";
-insStr = insStr + "\'"+request.body.sname+"\') ";
+let insStr = "insert into BOOKINGS(name, day, month, year) values (";
+insStr = insStr + "\'"+request.body.name+"\', ";
+insStr = insStr + "\'"+request.body.day+"\') ";
+insStr = insStr + "\'"+request.body.month+"\') ";
+insStr = insStr + "\'"+request.body.year+"\') ";
 db.run(insStr);
 });
 
 // Process the HTTP GET request for /getData
 app.get('/getData', function(request, response) {
 console.log("In app.get (/getData)");
-db.all('SELECT * from person', function(err, rows) {
+db.all('SELECT * from BOOKINGS', function(err, rows) {
 response.send(JSON.stringify(rows));
 });
 });
